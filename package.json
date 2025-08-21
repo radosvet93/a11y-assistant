@@ -1,0 +1,32 @@
+{
+  "name": "a11y-assistant",
+  "version": "0.1.0",
+  "description": "A tiny accessibility assistant CLI to detect and explain common a11y issues",
+  "main": "index.js",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "assistant",
+    "web"
+  ],
+  "author": "Radosvet Petrov",
+  "license": "MIT",
+  "packageManager": "pnpm@10.13.1",
+  "dependencies": {
+    "cheerio": "^1.1.2"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/node": "^24.3.0",
+    "eslint": "^9.33.0",
+    "globals": "^16.3.0",
+    "jiti": "^2.5.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.40.0"
+  }
+}

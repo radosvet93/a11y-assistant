@@ -77,13 +77,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm
 
       - name: Build
-        run: npm run build
+        run: pnpm build
 
       - name: Run A11y Assistant
-        run: npx a11y-assistant ./dist/index.html
+        run: pnpx a11y-assistant ./dist/index.html
 ```
 
 Now every pull request will run the a11y checks and show the report in the workflow logs.
@@ -99,7 +99,7 @@ Now every pull request will run the a11y checks and show the report in the workf
 PRs, ideas, and issues are welcome!
 
 - Create a branch from main
-- Run npm install
+- Run pnpm install
 - Add or update a rule in src/rules
 
 Test locally with:
