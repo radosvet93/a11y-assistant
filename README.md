@@ -54,10 +54,10 @@ Example output:
 ```
 
 ## 📋 Roadmap
-- [] More rules (links, colour contrast, ARIA patterns)
-- [] Inline PR comments for detected issues
-- [] AI assistant layer to explain fixes in context, get the data from the WCAG
-- [] VS Code extension for inline feedback
+- More rules (links, colour contrast, ARIA patterns)
+- Inline PR comments for detected issues
+- AI assistant layer to explain fixes in context, get the data from the WCAG
+- VS Code extension for inline feedback
 
 ## 🤝 Contributing
 PRs, ideas, and issues are welcome!
