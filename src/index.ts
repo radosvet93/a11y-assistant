@@ -1,40 +1,37 @@
 import fs from "fs";
 import path from "path";
+import ora from "ora";
 import { runChecks } from "./runner";
-import ora from 'ora';
-import { log, error, success, info, warning, highlight } from './logHelpers';
+import { logReport } from "./helpers/log";
 
 const filePath = process.argv[2];
-
-if (!filePath) {
-  console.error(error("Usage: a11y-assistant <html-file>"));
-  process.exit(1);
-}
-
 const fullPath = path.resolve(filePath);
 
-if (!fs.existsSync(fullPath)) {
-  console.error(error(`File not found: ${fullPath}`));
+if (!filePath) {
+  console.error("Usage: tsx src/index.ts <html-file>");
   process.exit(1);
 }
 
-const html = fs.readFileSync(fullPath, "utf-8");
-const results = runChecks(html);
+if (!fs.existsSync(fullPath)) {
+  console.error(`File not found: ${fullPath}`);
+  process.exit(1);
+}
 
-const spinner = ora('Running accessibility checks...').start();
+(async () => {
+  const spinner = ora("Running accessibility checks...").start();
 
-setTimeout(() => {
-  spinner.stop();
+  try {
+    const a11yReport = await runChecks(fullPath);
 
-  log(success(`\nAccessibility checks completed for: ${fullPath}\n`));
+    spinner.stop();
 
-  log(info("\n🔎 A11y Assistant Report\n"));
-  results.forEach(r => {
-    const status = r.ok ? "✅" : "❌";
-    log(info(`${status} ${r.message}`));
-    if (!r.ok && r.explanation) {
-      log(warning(`   Why: ${r.explanation}`));
-      log(highlight(`   Fix: ${r.suggestion}\n`));
+    logReport(a11yReport, fullPath);
+
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(`Failed to run checks: ${err.message}`);
     }
-  });
-}, 1000);
+    spinner.stop();
+    process.exit(1);
+  }
+})();

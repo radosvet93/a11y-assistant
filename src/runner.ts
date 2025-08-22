@@ -1,20 +1,34 @@
-import { load } from "cheerio";
-import { checkImgAlt } from "./rules/img-alt";
-import { checkFormLabels } from "./rules/form-label";
-import { checkHeadingOrder } from "./rules/heading-order";
+import fs from "fs";
+import path from "path";
+import { JSDOM } from "jsdom";
+import axe from "axe-core";
+import { runCustomChecks } from "./customChecks";
 
-export type CheckResult = {
-  ok: boolean;
-  message: string;
-  explanation?: string;
-  suggestion?: string;
-};
+export async function runChecks(fullPath: string) {
+  const html = fs.readFileSync(fullPath, "utf-8");
 
-export function runChecks(html: string): CheckResult[] {
-  const $ = load(html, { sourceCodeLocationInfo: true });
-  return [
-    ...checkImgAlt($),
-    ...checkFormLabels($),
-    ...checkHeadingOrder($),
-  ];
+  const dom = new JSDOM(html);
+  const { window } = dom;
+
+  const config = {
+    rules: {
+      'color-contrast': { enabled: false },
+      'link-in-text-block': { enabled: false }
+    }
+  };
+  const results = await axe.run(window.document.documentElement, config);
+
+  const axeViolations = results.violations.map((violation) => ({
+    valid: false,
+    message: violation.help,
+    explanation: violation.description,
+    suggestion: violation.help,
+    helpUrl: violation.helpUrl,
+    file: path.resolve(fullPath),
+    nodes: violation.nodes.map((n) => n.html)
+  }));
+
+  const customViolations = runCustomChecks(html);
+
+  return [...axeViolations, ...customViolations];
 }
