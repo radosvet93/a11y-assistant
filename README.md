@@ -37,24 +37,12 @@ tsx src/index.ts example.html
 
 Example output:
 
-```php-template
-🔎 A11y Assistant Report
-
-❌ <img> missing alt attribute
-   💡 Why: Screen reader users rely on alt text to understand images.
-   🛠 Fix: <img src="hero.png" alt="Company hero banner">
-
-✅ Heading order is logical
-
-❌ <input> missing associated label
-   💡 Why: Form fields must have labels so users know what information to enter.
-   🛠 Fix:
-   <label for="email">Email address</label>
-   <input id="email">
-```
+![CLI output](image.png)
 
 ## 📋 Roadmap
+- Add tests
 - More rules (links, colour contrast, ARIA patterns)
+- Published to npm
 - Inline PR comments for detected issues
 - AI assistant layer to explain fixes in context, get the data from the WCAG
 - VS Code extension for inline feedback
