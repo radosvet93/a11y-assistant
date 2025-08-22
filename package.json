@@ -1,6 +1,6 @@
 {
   "name": "a11y-assistant",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A tiny accessibility assistant CLI to detect and explain common a11y issues",
   "main": "index.js",
   "keywords": [
@@ -13,7 +13,9 @@
   "license": "MIT",
   "packageManager": "pnpm@10.13.1",
   "dependencies": {
-    "cheerio": "^1.1.2"
+    "axe-core": "^4.10.3",
+    "boxen": "^8.0.1",
+    "jsdom": "^26.1.0"
   },
   "scripts": {
     "start": "node dist/index.js example.html",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^24.3.0",
     "chalk": "^5.6.0",
     "eslint": "^9.33.0",
