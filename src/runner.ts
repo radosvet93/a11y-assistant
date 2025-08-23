@@ -6,9 +6,8 @@ import { runCustomChecks } from "./customChecks";
 
 export async function runChecks(fullPath: string) {
   const html = fs.readFileSync(fullPath, "utf-8");
-
   const dom = new JSDOM(html);
-  const { window } = dom;
+  const { document } = dom.window;
 
   const config = {
     rules: {
@@ -16,9 +15,10 @@ export async function runChecks(fullPath: string) {
       'link-in-text-block': { enabled: false }
     }
   };
-  const results = await axe.run(window.document.documentElement, config);
 
-  const axeViolations = results.violations.map((violation) => ({
+  const { violations } = await axe.run(document.documentElement, config);
+
+  const axeViolations = violations.map((violation) => ({
     valid: false,
     message: violation.help,
     explanation: violation.description,
