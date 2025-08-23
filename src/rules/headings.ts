@@ -12,11 +12,9 @@ export const h1Single = (document: Document) => {
       explanation: "Page should have only one <h1> heading.",
       suggestion: "Use <h2> or lower for subsequent headings.",
       helpUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements",
-      nodes: Array.from(h1s).map((el) => el.outerHTML)
+      nodes: Array.from(h1s).map((heading) => heading.outerHTML)
     });
-  } else if (h1s.length === 1) {
-    results.push({ id: "h1-found", valid: true, message: "Single <h1> heading found" });
-  } else {
+  } else if (h1s.length === 0) {
     results.push({
       id: "h1-missing",
       valid: false,
