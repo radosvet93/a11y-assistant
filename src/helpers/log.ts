@@ -8,16 +8,15 @@ const warning = chalk.yellow;
 const info = chalk.cyan;
 const highlight = chalk.bold;
 const title = chalk.bold.underline;
-const log = console.log;
 
 export const logReport = (a11yReport: CustomViolation[], fullPath: string) => {
   if (a11yReport.length === 0) {
-    log(success(`\n🎉 No accessibility issues found in: ${fullPath}\n`));
+    console.log(success(`\n🎉 No accessibility issues found in: ${fullPath}\n`));
     process.exit(0);
   }
 
-  log(success(`\nAccessibility checks completed for: ${fullPath}\n`));
-  log(title("🔎 A11y Assistant Report\n"));
+  console.log(success(`\nAccessibility checks completed for: ${fullPath}\n`));
+  console.log(title("🔎 A11y Assistant Report\n"));
 
   a11yReport.forEach(({ valid, message, explanation, suggestion, helpUrl, nodes }, index) => {
     const header = `${valid ? "✅ PASSED" : "❌ ISSUE"} ${index + 1}: ${message}`;
@@ -40,8 +39,8 @@ export const logReport = (a11yReport: CustomViolation[], fullPath: string) => {
       borderStyle: "single",
     });
 
-    log(box);
+    console.log(box);
   });
 
-  log(success(`\nFound ${a11yReport.length} accessibility issue(s) in total.`));
+  console.log(success(`\nFound ${a11yReport.length} accessibility issue(s) in total.`));
 }
