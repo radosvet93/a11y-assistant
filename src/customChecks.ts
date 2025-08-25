@@ -1,5 +1,5 @@
 import { JSDOM } from "jsdom";
-import { h1Single } from './rules';
+import { duplicateIds, h1Single } from './rules';
 import { type CustomViolation } from "./types";
 
 export function runCustomChecks(html: string): CustomViolation[] {
@@ -7,7 +7,7 @@ export function runCustomChecks(html: string): CustomViolation[] {
   const { document } = dom.window;
   const violations: CustomViolation[] = [];
 
-  violations.push(...h1Single(document));
+  violations.push(...h1Single(document), ...duplicateIds(document));
 
   return violations;
 }
