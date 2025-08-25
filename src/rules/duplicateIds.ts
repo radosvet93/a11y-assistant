@@ -1,4 +1,4 @@
-import { type CustomViolation } from "../types";
+import type { CustomViolation } from "../types";
 
 export const duplicateIds = (document: Document) => {
   const results: CustomViolation[] = [];

@@ -1,4 +1,4 @@
-import { type CustomViolation } from "../types";
+import type { CustomViolation } from "../types";
 
 export const h1Single = (document: Document) => {
   const results: CustomViolation[] = [];

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { JSDOM } from "jsdom";
 import axe from "axe-core";
-import { runCustomChecks } from "./customChecks";
+import { runCustomChecks } from "./helpers/customChecks";
 
 export async function runChecks(fullPath: string) {
   const html = fs.readFileSync(fullPath, "utf-8");
@@ -28,7 +28,7 @@ export async function runChecks(fullPath: string) {
     nodes: violation.nodes.map((n) => n.html)
   }));
 
-  const customViolations = runCustomChecks(html);
+  const customViolations = runCustomChecks(document);
 
   return [...axeViolations, ...customViolations];
 }
