@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/radosvet93/a11y-assistant/compare/v0.4.0...v0.5.0) (2025-08-25)
+
+
+### Features
+
+* changed the release-please to be node ([2f1e789](https://github.com/radosvet93/a11y-assistant/commit/2f1e7895890fbfe1fedb1cce2f2bc5b8c6c8e46d))
+
 ## 0.4.0 (2025-08-25)
 
 
