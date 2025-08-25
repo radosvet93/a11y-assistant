@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/radosvet93/a11y-assistant/compare/v0.5.0...v0.6.0) (2025-08-25)
+
+
+### Features
+
+* added heading-hierarchy custom rule ([efc8704](https://github.com/radosvet93/a11y-assistant/commit/efc8704535638b3d119be531f07ef7a8f65791d2))
+
 ## [0.5.0](https://github.com/radosvet93/a11y-assistant/compare/v0.4.0...v0.5.0) (2025-08-25)
 
 
