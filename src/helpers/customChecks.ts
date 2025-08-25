@@ -1,10 +1,12 @@
-import { duplicateIds, h1Single } from '../rules';
+import * as rules from '../rules';
 import type { CustomViolation } from "../types";
 
 export function runCustomChecks(document: Document): CustomViolation[] {
   const violations: CustomViolation[] = [];
 
-  violations.push(...h1Single(document), ...duplicateIds(document));
+  Object.values(rules).forEach(rule => {
+    violations.push(...rule(document));
+  });
 
   return violations;
 }
