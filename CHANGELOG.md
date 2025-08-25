@@ -1,0 +1,8 @@
+# Changelog
+
+## 1.0.0 (2025-08-25)
+
+
+### Features
+
+* added gh action release-please ([b0d41bf](https://github.com/radosvet93/a11y-assistant/commit/b0d41bfa167be455a60028aab18e83c09a21686a))
