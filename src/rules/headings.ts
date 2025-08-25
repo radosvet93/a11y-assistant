@@ -1,6 +1,7 @@
 import type { CustomViolation } from "../types";
+import type { JSDOM } from "jsdom";
 
-export const h1Single = (document: Document): CustomViolation[] => {
+export const h1Single = (document: Document, dom: JSDOM): CustomViolation[] => {
   const results: CustomViolation[] = [];
   const h1s = document.querySelectorAll("h1");
 
@@ -12,6 +13,7 @@ export const h1Single = (document: Document): CustomViolation[] => {
       explanation: "Page should have only one <h1> heading.",
       suggestion: "Use <h2> or lower for subsequent headings.",
       helpUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements",
+      line: dom.nodeLocation?.(h1s[0])?.startLine,
       nodes: Array.from(h1s).map((heading) => heading.outerHTML)
     });
   } else if (h1s.length === 0) {
@@ -22,6 +24,7 @@ export const h1Single = (document: Document): CustomViolation[] => {
       explanation: "Every page should have one <h1> heading to define its main topic.",
       suggestion: "Add a single <h1> element that describes the main content of the page.",
       helpUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements",
+      line: undefined,
       nodes: []
     });
   }
@@ -29,7 +32,7 @@ export const h1Single = (document: Document): CustomViolation[] => {
   return results;
 }
 
-export const headingHierarchy = (document: Document): CustomViolation[] => {
+export const headingHierarchy = (document: Document, dom: JSDOM): CustomViolation[] => {
   const results: CustomViolation[] = [];
   const headings = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6"));
 
@@ -44,6 +47,7 @@ export const headingHierarchy = (document: Document): CustomViolation[] => {
         explanation: "The page should start with a single <h1> heading to define the main title.",
         suggestion: "Change this heading to <h1>.",
         helpUrl: "https://www.w3.org/WAI/tutorials/page-structure/headings/",
+        line: dom.nodeLocation?.(heading)?.startLine,
         nodes: [heading.outerHTML],
       });
     }

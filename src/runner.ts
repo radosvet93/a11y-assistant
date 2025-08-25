@@ -6,7 +6,7 @@ import { runCustomChecks } from "./helpers/customChecks";
 
 export async function runChecks(fullPath: string) {
   const html = fs.readFileSync(fullPath, "utf-8");
-  const dom = new JSDOM(html);
+  const dom = new JSDOM(html, { includeNodeLocations: true });
   const { document } = dom.window;
 
   const config = {
@@ -28,7 +28,7 @@ export async function runChecks(fullPath: string) {
     nodes: violation.nodes.map((n) => n.html)
   }));
 
-  const customViolations = runCustomChecks(document);
+  const customViolations = runCustomChecks(document, dom);
 
   return [...axeViolations, ...customViolations];
 }

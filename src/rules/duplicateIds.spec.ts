@@ -21,8 +21,8 @@ describe("duplicateIds Rules", () => {
         expected: [{ id: "duplicate-ids", valid: false, nodes: 2 }],
       },
     ])("should $name", ({ html, expected }) => {
-      const dom = new JSDOM(`<html><body>${html}</body></html>`);
-      const violations = duplicateIds(dom.window.document);
+      const dom = new JSDOM(`<html><body>${html}</body></html>`, { includeNodeLocations: true });
+      const violations = duplicateIds(dom.window.document, dom);
 
       if (expected.length === 0) {
         expect(violations).toHaveLength(0);

@@ -1,6 +1,7 @@
 import type { CustomViolation } from "../types";
+import type { JSDOM } from "jsdom";
 
-export const duplicateIds = (document: Document) => {
+export const duplicateIds = (document: Document, dom: JSDOM) => {
   const results: CustomViolation[] = [];
   const ids = new Map<string, HTMLElement[]>();
 
@@ -27,6 +28,7 @@ export const duplicateIds = (document: Document) => {
         explanation: "IDs must be unique in the DOM to ensure predictable behaviour for scripts and assistive tech.",
         suggestion: "Update or remove duplicate IDs to make them unique.",
         helpUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id",
+        line: dom.nodeLocation(elements[0])?.startLine,
         nodes: elements.map((el) => el.outerHTML)
       });
     }

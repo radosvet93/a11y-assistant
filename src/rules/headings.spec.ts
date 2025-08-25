@@ -26,8 +26,8 @@ describe("Heading Rules", () => {
         expected: [{ id: "h1-missing", valid: false, nodes: 0 }],
       },
     ])("should $name", ({ html, expected }) => {
-      const dom = new JSDOM(`<html><body>${html}</body></html>`);
-      const violations = h1Single(dom.window.document);
+      const dom = new JSDOM(`<html><body>${html}</body></html>`, { includeNodeLocations: true });
+      const violations = h1Single(dom.window.document, dom);
 
       if (expected.length === 0) {
         expect(violations).toHaveLength(0);
@@ -60,8 +60,8 @@ describe("Heading Rules", () => {
         expected: [{ id: "heading-hierarchy", valid: false, nodes: 1 }],
       },
     ])("should $name", ({ html, expected }) => {
-      const dom = new JSDOM(`<html><body>${html}</body></html>`);
-      const violations = headingHierarchy(dom.window.document);
+      const dom = new JSDOM(`<html><body>${html}</body></html>`, { includeNodeLocations: true });
+      const violations = headingHierarchy(dom.window.document, dom);
 
       if (expected.length === 0) {
         expect(violations).toHaveLength(0);

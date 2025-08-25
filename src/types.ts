@@ -6,5 +6,6 @@ export type CustomViolation = {
   suggestion?: string;
   helpUrl?: string;
   nodes?: string[];
+  line?: number;
   valid: boolean;
 }
