@@ -1,6 +1,6 @@
 {
   "name": "a11y-assistant",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A tiny accessibility assistant CLI to detect and explain common a11y issues",
   "main": "index.js",
   "keywords": [
