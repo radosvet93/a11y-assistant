@@ -1,6 +1,6 @@
 import type { CustomViolation } from "../types";
 
-export const h1Single = (document: Document) => {
+export const h1Single = (document: Document): CustomViolation[] => {
   const results: CustomViolation[] = [];
   const h1s = document.querySelectorAll("h1");
 
@@ -28,3 +28,26 @@ export const h1Single = (document: Document) => {
 
   return results;
 }
+
+export const headingHierarchy = (document: Document): CustomViolation[] => {
+  const results: CustomViolation[] = [];
+  const headings = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6"));
+
+  headings.forEach((heading, index) => {
+    const currentLevel = parseInt(heading.tagName[1], 10);
+
+    if (index === 0 && currentLevel !== 1) {
+      results.push({
+        id: "heading-hierarchy",
+        valid: false,
+        message: `First heading is <h${currentLevel}> instead of <h1>.`,
+        explanation: "The page should start with a single <h1> heading to define the main title.",
+        suggestion: "Change this heading to <h1>.",
+        helpUrl: "https://www.w3.org/WAI/tutorials/page-structure/headings/",
+        nodes: [heading.outerHTML],
+      });
+    }
+  });
+
+  return results;
+};

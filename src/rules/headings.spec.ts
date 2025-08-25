@@ -1,7 +1,7 @@
 import path from "path";
 import { JSDOM } from "jsdom";
 import { describe, it, expect } from "vitest";
-import { h1Single } from "./headings";
+import { h1Single, headingHierarchy } from "./headings";
 import { runChecks } from "../runner";
 import type { CustomViolation } from "../types";
 
@@ -39,7 +39,41 @@ describe("Heading Rules", () => {
     });
   });
 
-  describe('runChecks integration', () => {
+  describe("headingHierarchy function", () => {
+    it.each([
+      {
+        name: "passes with proper hierarchy",
+        html: `
+          <h1>Main Heading</h1>
+          <h2>Subheading</h2>
+          <h3>Sub-subheading</h3>
+          <h2>Another Subheading</h2>
+        `,
+        expected: [],
+      },
+      {
+        name: "violates when first heading is not h1",
+        html: `
+          <h2>Subheading first</h2>
+          <h1>Sub-subheading</h1>
+        `,
+        expected: [{ id: "heading-hierarchy", valid: false, nodes: 1 }],
+      },
+    ])("should $name", ({ html, expected }) => {
+      const dom = new JSDOM(`<html><body>${html}</body></html>`);
+      const violations = headingHierarchy(dom.window.document);
+
+      if (expected.length === 0) {
+        expect(violations).toHaveLength(0);
+      } else {
+        expect(violations[0].id).toBe(expected[0].id);
+        expect(violations[0].valid).toBe(expected[0].valid);
+        expect(violations[0].nodes).toHaveLength(expected[0].nodes);
+      }
+    });
+  });
+
+  describe("runChecks integration", () => {
     it.each([
       {
         name: "violates with multiple <h1>",
@@ -54,6 +88,13 @@ describe("Heading Rules", () => {
         id: "h1-missing",
         valid: false,
         nodes: 0,
+      },
+      {
+        name: "violates with heading hierarchy",
+        file: "heading-hierarchy.html",
+        id: "heading-hierarchy",
+        valid: false,
+        nodes: 1,
       },
     ])("should $name", async ({ file, id, valid, nodes }) => {
       const filePath = path.resolve(testFilesDir, file);
