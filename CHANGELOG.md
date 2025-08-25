@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/radosvet93/a11y-assistant/compare/v0.6.0...v0.7.0) (2025-08-25)
+
+
+### Features
+
+* added line numbers, so VS code can click to issue ([7d5946e](https://github.com/radosvet93/a11y-assistant/commit/7d5946e7f95e0e86268b3bf91584e03cfb42b7ea))
+
 ## [0.6.0](https://github.com/radosvet93/a11y-assistant/compare/v0.5.0...v0.6.0) (2025-08-25)
 
 
