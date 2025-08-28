@@ -1,0 +1,10 @@
+node_modules
+coverage
+.github
+.husky
+src
+.gitignore
+.npmignore
+eslint.config.mts
+pnpm-lock.yaml
+tsconfig.json

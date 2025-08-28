@@ -1,16 +1,17 @@
 import fs from "fs";
 import path from "path";
 import ora from "ora";
-import { runChecks } from "./runner";
+import { analyseFile } from "./lib";
 import { logReport } from "./helpers/log";
 
 const filePath = process.argv[2];
-const fullPath = path.resolve(filePath);
 
 if (!filePath) {
-  console.error("Usage: tsx src/index.ts <html-file>");
+  console.error("Usage: a11y-assistant <html-file>");
   process.exit(1);
 }
+
+const fullPath = path.resolve(filePath);
 
 if (!fs.existsSync(fullPath)) {
   console.error(`File not found: ${fullPath}`);
@@ -21,17 +22,20 @@ if (!fs.existsSync(fullPath)) {
   const spinner = ora("Running accessibility checks...").start();
 
   try {
-    const a11yReport = await runChecks(fullPath);
+    const report = await analyseFile(fullPath);
 
     spinner.stop();
 
-    logReport(a11yReport, fullPath);
+    logReport(report, fullPath);
 
-  } catch (err: unknown) {
+  } catch (err) {
+
     if (err instanceof Error) {
-      console.error(`Failed to run checks: ${err.message}`);
+      console.error(`Failed to run checks: ${(err).message}`);
     }
+
     spinner.stop();
+
     process.exit(1);
   }
 })();
