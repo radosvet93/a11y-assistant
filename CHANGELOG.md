@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/radosvet93/a11y-assistant/compare/v0.8.0...v0.8.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* setup pnpm first before running it ([83111fb](https://github.com/radosvet93/a11y-assistant/commit/83111fb75b65361dcd162bcdb6df5fa45a17dfe8))
+
 ## [0.8.0](https://github.com/radosvet93/a11y-assistant/compare/v0.7.0...v0.8.0) (2025-08-28)
 
 
