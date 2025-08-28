@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/radosvet93/a11y-assistant/compare/v0.7.0...v0.8.0) (2025-08-28)
+
+
+### Features
+
+* prepare for npm publishing + split the CLI ([e508462](https://github.com/radosvet93/a11y-assistant/commit/e5084625c7f3549085592c3c6644c97f70ce5fc3))
+
 ## [0.7.0](https://github.com/radosvet93/a11y-assistant/compare/v0.6.0...v0.7.0) (2025-08-25)
 
 
