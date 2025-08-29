@@ -36,6 +36,6 @@ describe("runChecks", () => {
     expect(violations[1]).toHaveProperty("explanation", "Every page should have one <h1> heading to define its main topic.");
     expect(violations[1]).toHaveProperty("suggestion", 'Add a single <h1> element that describes the main content of the page.');
     expect(violations[1]).toHaveProperty("helpUrl", "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements");
-    expect(violations[1]).toHaveProperty("nodes", []);
+    expect(violations[1]).toHaveProperty("nodes", [{ html: '', line: 0, column: 0 }]);
   })
 });

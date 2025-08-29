@@ -36,7 +36,17 @@ export async function runChecks(input: string, options?: RunChecksOptions) {
     suggestion: violation.help,
     helpUrl: violation.helpUrl,
     file: filePath,
-    nodes: violation.nodes.map((n) => n.html)
+    nodes: violation.nodes.map((node) => {
+      const targetNode = node.target?.[0];
+      const selector = document.querySelector(String(targetNode))
+      const location = selector ? dom.nodeLocation(selector) : null;
+
+      return {
+        html: node.html,
+        line: location?.startLine ?? 0,
+        column: location?.startCol ?? 0,
+      };
+    }),
   }));
 
   const customViolations = runCustomChecks(document, dom);

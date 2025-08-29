@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import ora from "ora";
 import { analyseFile } from "./lib";
 import { logReport } from "./helpers/log";
 
@@ -19,22 +18,15 @@ if (!fs.existsSync(fullPath)) {
 }
 
 (async () => {
-  const spinner = ora("Running accessibility checks...").start();
-
   try {
     const report = await analyseFile(fullPath);
-
-    spinner.stop();
 
     logReport(report, fullPath);
 
   } catch (err) {
-
     if (err instanceof Error) {
       console.error(`Failed to run checks: ${(err).message}`);
     }
-
-    spinner.stop();
 
     process.exit(1);
   }

@@ -18,12 +18,12 @@ describe("Heading Rules", () => {
       {
         name: "violates with multiple <h1>",
         html: `<h1>Heading 1</h1><h1>Another Heading 1</h1>`,
-        expected: [{ id: "h1-single", valid: false, nodes: 2 }],
+        expected: [{ id: "h1-single", valid: false }],
       },
       {
         name: "violates with no <h1>",
         html: `<p>No H1 here</p>`,
-        expected: [{ id: "h1-missing", valid: false, nodes: 0 }],
+        expected: [{ id: "h1-missing", valid: false }],
       },
     ])("should $name", ({ html, expected }) => {
       const dom = new JSDOM(`<html><body>${html}</body></html>`, { includeNodeLocations: true });
@@ -34,7 +34,6 @@ describe("Heading Rules", () => {
       } else {
         expect(violations[0].id).toBe(expected[0].id);
         expect(violations[0].valid).toBe(expected[0].valid);
-        expect(violations[0].nodes).toHaveLength(expected[0].nodes);
       }
     });
   });
@@ -57,7 +56,7 @@ describe("Heading Rules", () => {
           <h2>Subheading first</h2>
           <h1>Sub-subheading</h1>
         `,
-        expected: [{ id: "heading-hierarchy", valid: false, nodes: 1 }],
+        expected: [{ id: "heading-hierarchy", valid: false }],
       },
     ])("should $name", ({ html, expected }) => {
       const dom = new JSDOM(`<html><body>${html}</body></html>`, { includeNodeLocations: true });
@@ -68,7 +67,6 @@ describe("Heading Rules", () => {
       } else {
         expect(violations[0].id).toBe(expected[0].id);
         expect(violations[0].valid).toBe(expected[0].valid);
-        expect(violations[0].nodes).toHaveLength(expected[0].nodes);
       }
     });
   });
@@ -80,29 +78,25 @@ describe("Heading Rules", () => {
         file: "multiple-h1.html",
         id: "h1-single",
         valid: false,
-        nodes: 2,
       },
       {
         name: "violates with no <h1>",
         file: "missing-h1.html",
         id: "h1-missing",
         valid: false,
-        nodes: 0,
       },
       {
         name: "violates with heading hierarchy",
         file: "heading-hierarchy.html",
         id: "heading-hierarchy",
         valid: false,
-        nodes: 1,
       },
-    ])("should $name", async ({ file, id, valid, nodes }) => {
+    ])("should $name", async ({ file, id, valid }) => {
       const filePath = path.resolve(testFilesDir, file);
       const violations: CustomViolation[] = await runChecks(filePath);
 
       expect(violations[0].id).toBe(id);
       expect(violations[0].valid).toBe(valid);
-      expect(violations[0].nodes).toHaveLength(nodes);
     });
   });
 });

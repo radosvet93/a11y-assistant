@@ -29,7 +29,7 @@ describe('logReport', () => {
         explanation: 'Images should have alt text for accessibility.',
         suggestion: 'Add alt text to the image.',
         helpUrl: 'https://example.com/image-alt',
-        nodes: ['<img src="image.jpg">']
+        nodes: [{ html: '<img src="image.jpg">', line: 12, column: 2 }]
       },
       {
         valid: false,
@@ -37,7 +37,7 @@ describe('logReport', () => {
         explanation: 'Every page should have one <h1> heading to define its main topic.',
         suggestion: 'Add a single <h1> element that describes the main content of the page.',
         helpUrl: 'https://example.com/no-heading-one',
-        nodes: []
+        nodes: [{ html: '', line: 0, column: 0 }]
       }
     ];
     const fullPath = 'test/file.html';
@@ -53,8 +53,6 @@ describe('logReport', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Fix: Add alt text to the image.'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Link: https://example.com/image-alt'));
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('File: test/file.html'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Nodes:'));
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('<img src="image.jpg">'));
 
     // Check second issue
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('❌ ISSUE 2: No <h1> heading found'));

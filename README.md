@@ -32,7 +32,7 @@ pnpm install
 Run against an HTML file:
 
 ```bash
-tsx src/index.ts example.html
+pnpm a11y-assistant example.html
 ```
 
 Example output:
@@ -40,9 +40,7 @@ Example output:
 ![CLI output](image.png)
 
 ## 📋 Roadmap
-- Add tests
 - More rules (links, colour contrast, ARIA patterns)
-- Published to npm
 - Inline PR comments for detected issues
 - AI assistant layer to explain fixes in context, get the data from the WCAG
 - VS Code extension for inline feedback

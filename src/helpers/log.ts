@@ -18,20 +18,15 @@ export const logReport = (a11yReport: CustomViolation[], fullPath: string) => {
   console.log(success(`\nAccessibility checks completed for: ${fullPath}\n`));
   console.log(title("🔎 A11y Assistant Report\n"));
 
-  a11yReport.forEach(({ valid, message, explanation, suggestion, helpUrl, line, nodes }, index) => {
+  a11yReport.forEach(({ valid, message, explanation, suggestion, helpUrl, nodes }, index) => {
     const header = `${valid ? "✅ PASSED" : "❌ ISSUE"} ${index + 1}: ${message}`;
-    const lines = line ? ":" + line : ":0";
 
     const content = [
       warning(`Why:`) + ` ${explanation}`,
       highlight(`Fix:`) + ` ${suggestion}`,
       info(`Link:`) + ` ${helpUrl}`,
-      info(`File:`) + ` ${fullPath}${lines}`,
-      nodes?.length
-        ? info(`Nodes:`) +
-        `\n${nodes.map((node, i) => `  ${i + 1}. ${node.trim()}`).join("\n")}`
-        : ""
-    ].filter(Boolean).join("\n");
+      info(`File:`) + ` ${fullPath}:${nodes?.[0].line}:${nodes?.[0].column}`,
+    ].join("\n");
 
     const box = boxen(`${header}\n\n${content}`, {
       padding: 1,

@@ -1,3 +1,4 @@
+export type ViolationSeverity = 'error' | 'warning' | 'info';
 
 export type CustomViolation = {
   id?: string;
@@ -5,7 +6,11 @@ export type CustomViolation = {
   explanation?: string;
   suggestion?: string;
   helpUrl?: string;
-  nodes?: string[];
-  line?: number;
+  severity?: ViolationSeverity
   valid: boolean;
+  nodes?: {
+    html: string,
+    line: number | null,
+    column: number | null
+  }[];
 }

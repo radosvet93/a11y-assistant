@@ -28,8 +28,12 @@ export const duplicateIds = (document: Document, dom: JSDOM) => {
         explanation: "IDs must be unique in the DOM to ensure predictable behaviour for scripts and assistive tech.",
         suggestion: "Update or remove duplicate IDs to make them unique.",
         helpUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id",
-        line: dom.nodeLocation(elements[0])?.startLine,
-        nodes: elements.map((el) => el.outerHTML)
+        severity: "warning",
+        nodes: elements.map((el) => ({
+          html: el.outerHTML,
+          line: dom.nodeLocation(elements[0])?.startLine ?? 0,
+          column: dom.nodeLocation(elements[0])?.startCol ?? 0
+        }))
       });
     }
   }
