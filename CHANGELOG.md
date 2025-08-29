@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/radosvet93/a11y-assistant/compare/v0.8.1...v0.9.0) (2025-08-29)
+
+
+### Features
+
+* added severity + line and column + general improvements + fix bundle ([bd845f3](https://github.com/radosvet93/a11y-assistant/commit/bd845f3d2f9433cb9067872f20a443a095b400f9))
+
 ## [0.8.1](https://github.com/radosvet93/a11y-assistant/compare/v0.8.0...v0.8.1) (2025-08-28)
 
 
