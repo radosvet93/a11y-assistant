@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/radosvet93/a11y-assistant/compare/v0.9.0...v0.10.0) (2025-08-31)
+
+
+### Features
+
+* moved to tsdown config + added types to export ([dcbef26](https://github.com/radosvet93/a11y-assistant/commit/dcbef26c4b1b515a4ab8cba52c7d8e19db851b54))
+
 ## [0.9.0](https://github.com/radosvet93/a11y-assistant/compare/v0.8.1...v0.9.0) (2025-08-29)
 
 
