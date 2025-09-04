@@ -12,11 +12,11 @@ Perfect for catching basic accessibility problems early. In your local developme
 
 - Checks for **common accessibility issues**, including:
   - Missing `alt` text on images
-  - Form fields without labels
+  - Missing <h1> tags
   - Skipped heading levels
 - Educational output with **plain language explanations** and **suggested fixes**
 - Runs locally
-- Lightweight and fast (<1s on most projects)
+- Lightweight and fast
 
 ## 📦 Installation
 
@@ -37,20 +37,8 @@ pnpm a11y-assistant example.html
 
 Example output:
 
-![CLI output](image.png)
+![CLI output](./image.png)
 
 ## 📋 Roadmap
 - More rules (links, colour contrast, ARIA patterns)
 - Inline PR comments for detected issues
-- AI assistant layer to explain fixes in context, get the data from the WCAG
-- VS Code extension for inline feedback
-
-## 🤝 Contributing
-PRs, ideas, and issues are welcome!
-
-- Create a branch from main
-- Run `pnpm install`
-- Add or update a rule in `src/rules`
-- check if the rules are working `pnpm dev`
-
-Open a pull request with a clear description
