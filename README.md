@@ -12,7 +12,7 @@ Perfect for catching basic accessibility problems early. In your local developme
 
 - Checks for **common accessibility issues**, including:
   - Missing `alt` text on images
-  - Missing <h1> tags
+  - Missing `<h1>` tags
   - Skipped heading levels
 - Educational output with **plain language explanations** and **suggested fixes**
 - Runs locally
